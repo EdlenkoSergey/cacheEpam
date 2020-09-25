@@ -21,12 +21,12 @@ public class PlainCache<K, V> implements Cache<K, V> {
     @Override
     public V get(K key) {
         V value = cache.get(key);
+        evictStrategy.applyEvictionPolicy(this, key);
         return value;
     }
 
     @Override
     public void put(K key, V value) {
-        evictIfNeeded();
         lock.lock();
         evictIfNeeded();
         cache.put(key, value);

@@ -40,6 +40,7 @@ public class LoadingCacheTest {
         String key = "1";
         cache.put(key, expectedValue);
         cache.get(key);
+        verify(evictStrategy).applyEvictionPolicy(cache, key);
         assertEquals(expectedValue, cache.get(key).intValue());
     }
 
@@ -50,7 +51,7 @@ public class LoadingCacheTest {
         String key = "1";
         cache.put(key, expectedValue);
         cache.put("2", 2);
-        verify(evictStrategy, times(2)).evict(cache);
+        verify(evictStrategy, times(1)).evict(cache);
         assertEquals(expectedValue, cache.get(key).intValue());
     }
 
