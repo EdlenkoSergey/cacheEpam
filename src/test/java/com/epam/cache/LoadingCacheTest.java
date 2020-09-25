@@ -40,7 +40,6 @@ public class LoadingCacheTest {
         String key = "1";
         cache.put(key, expectedValue);
         cache.get(key);
-        verify(evictStrategy).applyEvictionPolicy(cache, key);
         assertEquals(expectedValue, cache.get(key).intValue());
     }
 

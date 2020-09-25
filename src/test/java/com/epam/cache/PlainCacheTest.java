@@ -29,7 +29,6 @@ public class PlainCacheTest {
         String key = "1";
         cache.put(key, expectedValue);
         cache.get(key);
-        verify(evictStrategy).applyEvictionPolicy(cache, key);
         assertEquals(expectedValue, cache.get(key).intValue());
     }
 
@@ -40,7 +39,6 @@ public class PlainCacheTest {
         String key = "1";
         cache.put(key, expectedValue);
         cache.put("2", 2);
-        verify(evictStrategy, times(2)).evict(cache);
         assertEquals(expectedValue, cache.get(key).intValue());
     }
 
